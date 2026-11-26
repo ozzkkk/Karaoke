@@ -16,7 +16,7 @@ Telefon ve bilgisayar tarayıcısında çalışan, mikrofondan duyduğu şarkıy
 
 AudD hesabından API token oluştur: https://dashboard.audd.io/
 
-**API anahtarını GitHub'a, `app.js` dosyasına veya herkese açık bir yere yazma.** Anahtar yalnızca Cloudflare Worker'ın gizli değişkeni olarak saklanmalıdır.
+**API anahtarını GitHub'a, `app.js` dosyasına veya herkese açık bir yere yazma.** Anahtar yalnızca Cloudflare Worker'ın gizli değişkeni olarak saklanmalıdır. Anahtar daha önce sohbet, ekran görüntüsü veya herkese açık bir yerde paylaşıldıysa AudD panelinden iptal edip yenisini üret.
 
 ### 2. Cloudflare Worker oluştur
 
