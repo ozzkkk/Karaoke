@@ -1,4 +1,4 @@
-const WORKER_URL = 'https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev';
+const WORKER_URL = 'https://karaoke-api.o-elver.workers.dev';
 const $ = id => document.getElementById(id);
 const listenBtn=$('listen-btn'),againBtn=$('again-btn');let stream=null,activeLyrics=[],raf=0,startedAt=0,audioContext=null;
 function status(title,message){$('status-title').textContent=title;$('status-text').textContent=message}
