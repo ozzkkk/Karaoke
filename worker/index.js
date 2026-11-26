@@ -18,12 +18,12 @@ async function recognize(request,env,origin){
  const incoming=await request.formData(),file=incoming.get('file');
  if(!(file instanceof File)||file.size===0)return json({error:'Audio file is missing.'},400,origin);
  if(file.size>9*1024*1024)return json({error:'Audio file is too large.'},413,origin);
- const form=new FormData();form.append('api_token',env.AUDD_API_TOKEN);form.append('file',file,file.name||'karaoke.wav');
+ const form=new FormData();form.append('api_token',env.AUDD_API_TOKEN);form.append('file',file,file.name||'karaoke.wav');form.append('return','apple_music,deezer');
  const response=await fetch('https://api.audd.io/',{method:'POST',body:form});
  const data=await response.json();
  if(data.status!=='success')return json({error:data.error?.error_message||'AudD recognition failed.',code:data.error?.error_code},502,origin);
  const r=data.result;if(!r)return json({match:false},200,origin);
- return json({match:true,title:r.title||'',artist:r.artist||'',album:r.album||'',cover:r.apple_music?.artwork?.url||r.deezer?.album?.cover_big||'',duration:r.duration||0,offset:r.timecode?timecodeMs(r.timecode):0,songLink:r.song_link||''},200,origin);
+ return json({match:true,title:r.title||'',artist:r.artist||'',album:r.album||'',cover:(r.apple_music?.artwork?.url||'').replace('{w}','600').replace('{h}','600')||r.deezer?.album?.cover_big||'',duration:r.duration||0,offset:r.timecode?timecodeMs(r.timecode):0,songLink:r.song_link||''},200,origin);
 }
 function timecodeMs(value){const p=String(value).split(':').map(Number);if(p.some(Number.isNaN))return 0;return (p.reduce((n,v)=>n*60+v,0))*1000;}
 async function lyrics(song,origin){
